@@ -162,7 +162,7 @@ export default function KitchenQueue() {
             </h2>
             {nowServing ? (
               <div>
-                <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+                <p className="text-6xl md:text-8xl text-gray-600 leading-relaxed">
                   Order {nowServing.orderCode ?? `#${nowServing.id}`}
                 </p>
                 <ul className="list-disc list-inside text-gray-700 text-left mt-4">
