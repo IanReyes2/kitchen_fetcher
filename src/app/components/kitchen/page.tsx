@@ -17,7 +17,7 @@ interface Order {
   status?: string;
 }
 
-const WS_URL = "ws://192.168.1.4:3001/api/order"; // backend WebSocket
+const WS_URL = "ws://192.168.254.119:3001/api/order"; // backend WebSocket
 
 export default function KitchenQueue() {
   const [queue, setQueue] = useState<Order[]>([]);
