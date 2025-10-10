@@ -17,7 +17,7 @@ interface Order {
   status?: string;
 }
 
-const WS_URL = "ws://192.168.254.119:3001/api/order"; // backend WebSocket
+const WS_URL = "ws://192.168.254.124:3001/api/order"; // backend WebSocket
 
 export default function KitchenQueue() {
   const [queue, setQueue] = useState<Order[]>([]);
@@ -41,7 +41,7 @@ export default function KitchenQueue() {
     if (!order) return;
 
     try {
-      await fetch(`${API_URL}/api/order/${orderId}/`, { // <-- fixed URL
+      await fetch(`${API_URL}/api/order/${orderId}`, { // <-- fixed URL
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "served" }),
@@ -68,14 +68,14 @@ export default function KitchenQueue() {
 
         if (data.type === "init") {
           const confirmedOrders = (data.orders as Order[]).filter(
-            (o) => o.status === "pending"
+            (o) => o.status === "confirmed"
           );
           setQueue(confirmedOrders.sort((a, b) => a.id - b.id));
         }
 
         if (data.type === "new_order" || data.type === "status_update") {
           const o: Order = data.order;
-          if (o.status === "pending") {
+          if (o.status === "confirmed") {
             setQueue((prev) => {
               const map = new Map(prev.map((order) => [order.id, order]));
               map.set(o.id, o);
