@@ -1,3 +1,7 @@
-export const API_URL = "http://192.168.254.124:3001"; // backend HTTP URL
-export const WS_URL = "ws://192.168.254.124:3001"; // your backend WebSocket URL
+//export const API_URL = "http://192.168.254.124:3001"; // backend HTTP URL via globe wifi
+//export const WS_URL = "ws://192.168.254.124:3001"; // your backend WebSocket URL via globe wifi
  
+export const API_URL = "http://192.168.1.9:3001"; // backend HTTP URL via home wifi
+export const WS_URL = "ws://192.168.1.9:3001"; // your backend WebSocket URL via home wifi
+
+// (uncomment if needed)

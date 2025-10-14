@@ -17,17 +17,19 @@ interface Order {
   status?: string;
 }
 
-const WS_URL = "ws://192.168.254.124:3001/api/order"; // backend WebSocket
+//const WS_URL = "ws://192.168.254.124:3001/api/order"; // backend WebSocket via globe wifi
+ const WS_URL = "ws://192.168.1.9:3001/api/order"; // backend WebSocket via home wifi 
+ // (uncomment if needed)
 
 export default function KitchenQueue() {
   const [queue, setQueue] = useState<Order[]>([]);
   const [nowServing, setNowServing] = useState<Order | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
 
-  // ✅ Clear all orders
+  // Clear all orders
   const clearQueue = async () => {
     try {
-      await fetch(`${API_URL}/api/order/`, { method: "DELETE" }); // <-- fixed URL
+      await fetch(`${API_URL}/api/order/`, { method: "DELETE" }); 
       setQueue([]);
       setNowServing(null);
     } catch (err) {
