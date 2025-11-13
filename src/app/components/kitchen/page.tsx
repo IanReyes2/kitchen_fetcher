@@ -17,9 +17,15 @@ interface Order {
   status?: string;
 }
 
-//const WS_URL = "ws://192.168.254.124:3001/api/order"; // backend WebSocket via globe wifi
- const WS_URL = "ws://192.168.1.9:3001/api/order"; // backend WebSocket via home wifi 
- // (uncomment if needed)
+const hostname =
+  typeof window !== "undefined" ? window.location.hostname : "localhost";
+
+const wsProtocol =
+  typeof window !== "undefined" && window.location.protocol === "https:"
+    ? "wss"
+    : "ws";
+
+const WS_URL = `${wsProtocol}://${hostname}:3001/api/order`;
 
 export default function KitchenQueue() {
   const [queue, setQueue] = useState<Order[]>([]);
@@ -103,17 +109,20 @@ export default function KitchenQueue() {
     return () => wsRef.current?.close();
   }, []);
 
+  //HEADER PO ITO
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="text-gray-600 body-font">
+      <header className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
+      style={{ backgroundColor: "#670E10", color: "#fff",  textShadow: "2px 2px 6px #000",}}>
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-center">
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <img
-              src="/logo.png"
+              src="/SFAC_LOGO_Edited.png"
               alt="Logo"
-              className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+              className="w-10 h-10"
             />
-            <span className="ml-3 text-xl">The FrancisCanteen</span>
+            <span className="xl-3 text-xl text-white">
+              THE FRANCISCanteen</span>
           </a>
         </div>
       </header>
@@ -166,9 +175,9 @@ export default function KitchenQueue() {
             <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-800">
               Now Serving
             </h2>
-            {nowServing ? (
+            {nowServing ? ( 
               <div>
-                <p className="text-6xl md:text-8xl text-gray-600 leading-relaxed">
+                <p className="text-8xl md:text-12xl text-gray-600 leading-relaxed">
                   Order {nowServing.orderCode ?? `#${nowServing.id}`}
                 </p>
                 <ul className="list-disc list-inside text-gray-700 text-left mt-4">
@@ -191,9 +200,21 @@ export default function KitchenQueue() {
         </div>
       </main>
 
-      <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 mt-auto">
-        <aside>
-          <p>
+          {/*FOOTER PO ITO*/}
+        <footer
+        id="footer"
+        className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 mt-auto"
+        style={{
+          backgroundColor: "#670E10",
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 10,
+        }}
+      >
+        <aside className ="text-center m-0 text-white">
+            <p>
             Copyright © {new Date().getFullYear()} - All rights reserved by Saint
             Francis of Assisi College Las Piñas Campus.
           </p>

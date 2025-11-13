@@ -1,7 +1,20 @@
-//export const API_URL = "http://192.168.254.124:3001"; // backend HTTP URL via globe wifi
-//export const WS_URL = "ws://192.168.254.124:3001"; // your backend WebSocket URL via globe wifi
- 
-export const API_URL = "http://192.168.1.9:3001"; // backend HTTP URL via home wifi
-export const WS_URL = "ws://192.168.1.9:3001"; // your backend WebSocket URL via home wifi
+// lib/config.ts
 
-// (uncomment if needed)
+// Use hostname from the current browser or default to localhost
+const hostname = typeof window !== "undefined" ? window.location.hostname : "localhost";
+
+// Use the correct protocol
+const protocol =
+  typeof window !== "undefined" && window.location.protocol === "https:"
+    ? "https"
+    : "http";
+
+// Optional: you can define port and path in .env.local
+const port = process.env.NEXT_PUBLIC_API_PORT ?? "3001";
+const path = process.env.NEXT_PUBLIC_API_PATH ?? "";
+
+// Adaptive HTTP API URL
+export const API_URL = `${protocol}://${hostname}:${port}${path}`;
+
+// Adaptive WebSocket URL
+export const WS_URL = `${protocol === "https" ? "wss" : "ws"}://${hostname}:${port}${path}`;
