@@ -58,7 +58,7 @@ export default function KitchenQueue() {
       setNowServing(order);
       setQueue((prev) => prev.filter((o) => o.id !== orderId));
 
-      setTimeout(() => setNowServing(null), 5000);
+      setTimeout(() => setNowServing(null), 100000);
     } catch (err) {
       console.error("Failed to serve order:", err);
     }
